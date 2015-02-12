@@ -69,13 +69,12 @@ p {
   padding-top: 9px;
   font-weight: bold;
   line-height: 1;
-}
 
-#logo:hover {
-  color: white;
-  text-decoration: none;
+  &:hover {
+    color: white;
+    text-decoration: none;    
+  }
 }
-
 
 /* footer */
 
@@ -87,22 +86,22 @@ footer {
   small {
     float: left;
   }
-}
 
-footer a {
-  color: $gray;
-}
+  a {
+    color: $gray;
 
-footer a:hover {
-  color: $grayDarker;
-}
+    &:hover {
+      color: $grayDarker;
+    }
+  }
 
-footer ul {
-  float: right;
-  list-style: none;
-}
+  ul {
+    float: right;
+    list-style: none;
 
-footer ul li {
-  float: left;
-  margin-left: 10px;
+    li {
+      float: left;
+      margin-left: 10px;
+    }
+  }  
 }
