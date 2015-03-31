@@ -39,6 +39,7 @@ describe "User pages" do
 
       describe "after saving the user" do
         before { click_button submit }
+
         let(:user) { User.find_by_email('foo@bar.com') }
 
         it { should have_title(user.name) }
