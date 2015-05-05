@@ -5,10 +5,10 @@ describe "User pages" do
   subject { page }
 
   describe "index page" do
-    let(:user) { FactoryGirl.create(:user) }
-    
-    before(:each) do
-      sign_in user
+    before do
+      sign_in FactoryGirl.create(:user)
+      FactoryGirl.create(:user, name: "Bob", email: "bob@example.com")
+      FactoryGirl.create(:user, name: "Ben", email: "ben@example.com")
       visit users_path
     end
 
@@ -19,7 +19,7 @@ describe "User pages" do
       User.all.each do |user|
         page.should have_selector('li', text: user.name)
       end
-    end
+    end    
 
     describe "delete links" do
 
@@ -38,7 +38,7 @@ describe "User pages" do
         end
         it { should_not have_link('delete', href: user_path(admin)) }
       end
-    end        
+    end    
   end
 
   describe "signup page" do
