@@ -8,6 +8,9 @@ gem 'turbolinks'
 gem 'bootstrap-sass', '2.3.2'
 gem 'bcrypt', '~> 3.1.0'
 gem 'protected_attributes', '1.0.8'
+gem 'faker', '1.0.1'
+gem 'will_paginate', '~> 3.0.5'
+gem 'bootstrap-will_paginate', '0.0.6'
 
 group :assets do
   gem 'sass-rails', '~> 5.0'
