@@ -2,16 +2,21 @@
 #
 # Table name: users
 #
-#  id         :integer          not null, primary key
-#  name       :string
-#  email      :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id              :integer          not null, primary key
+#  name            :string
+#  email           :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  password_digest :string
+#  remember_token  :string
+#  admin           :boolean          default("f")
 #
 
 class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation
-  has_secure_password  
+  has_secure_password
+  has_many :microposts, dependent: :destroy
+  has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
@@ -26,6 +31,10 @@ class User < ActiveRecord::Base
 
   def current_user=(user)
     @current_user = user
+  end
+
+  def feed
+    Micropost.where("user_id = ?", id)
   end
 
   private
