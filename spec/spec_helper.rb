@@ -42,4 +42,5 @@ RSpec.configure do |config|
 
   # Add Capybara DSL to the RSpec helper file
   config.include Capybara::DSL  
+  config.include FactoryGirl::Syntax::Methods
 end
