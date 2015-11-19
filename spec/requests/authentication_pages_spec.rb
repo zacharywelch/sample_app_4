@@ -25,10 +25,12 @@ describe "Authentication" do
 
     describe "with valid information" do
       let(:user) { create :user }
-      before { valid_signin(user) }
+      before { sign_in user }
 
       it { should have_title(user.name) }
+      it { should have_link('Users', href: users_path) }
       it { should have_link('Profile', href: user_path(user)) }
+      it { should have_link('Settings', href: edit_user_path(user)) }
       it { should have_link('Sign out', href: signout_path) }
       it { should_not have_link('Sign in', href: signin_path) }
 
@@ -38,4 +40,23 @@ describe "Authentication" do
       end
     end    
   end
+
+  describe "authorization" do
+
+    describe "as wrong user" do
+      let(:user) { create :user }
+      let(:wrong_user) { create :user, email: "wrong@example.com" }
+      before { sign_in user }
+
+      describe "visiting Users#edit page" do
+        before { visit edit_user_path(wrong_user) }
+        it { should_not have_title(full_title('Edit user')) }
+      end
+
+      describe "submitting a PUT request to the Users#update action" do
+        before { put user_path(wrong_user) }
+        specify { response.should redirect_to(root_url) }
+      end
+    end
+  end  
 end
