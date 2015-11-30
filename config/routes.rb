@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :users
+  resources :microposts, only: [:create, :destroy]
   resources :sessions, only: [:new, :create, :destroy]
 
   get '/signup', to: 'users#new'
